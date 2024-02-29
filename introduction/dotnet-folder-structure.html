@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>User Token | ASP.NET Tutorials</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    
+    <meta name="description" content="We are going to be exploring different concepts in .NET">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <link rel="preload" href="/dotnet-tips/assets/css/0.styles.0de80903.css" as="style"><link rel="preload" href="/dotnet-tips/assets/js/app.9def0bc5.js" as="script"><link rel="preload" href="/dotnet-tips/assets/js/2.9a2dc7bc.js" as="script"><link rel="preload" href="/dotnet-tips/assets/js/14.f8064b5a.js" as="script"><link rel="prefetch" href="/dotnet-tips/assets/js/10.7833bc54.js"><link rel="prefetch" href="/dotnet-tips/assets/js/11.ae67bdf6.js"><link rel="prefetch" href="/dotnet-tips/assets/js/12.52d04fab.js"><link rel="prefetch" href="/dotnet-tips/assets/js/13.c1d5b853.js"><link rel="prefetch" href="/dotnet-tips/assets/js/3.2c80fa4d.js"><link rel="prefetch" href="/dotnet-tips/assets/js/4.7cb587c0.js"><link rel="prefetch" href="/dotnet-tips/assets/js/5.0023bf4c.js"><link rel="prefetch" href="/dotnet-tips/assets/js/6.4e53a11e.js"><link rel="prefetch" href="/dotnet-tips/assets/js/7.da886956.js"><link rel="prefetch" href="/dotnet-tips/assets/js/8.e849e537.js"><link rel="prefetch" href="/dotnet-tips/assets/js/9.dda5bb24.js">
+    <link rel="stylesheet" href="/dotnet-tips/assets/css/0.styles.0de80903.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/dotnet-tips/" class="home-link router-link-active"><!----> <span class="site-name">ASP.NET Tutorials</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/dotnet-tips/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/dotnet-tips/introduction/" class="nav-link router-link-active">
+  Introduction
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/dotnet-tips/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/dotnet-tips/introduction/" class="nav-link router-link-active">
+  Introduction
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Introduction to DotNet</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/dotnet-tips/introduction/" aria-current="page" class="sidebar-link">Overview</a></li><li><a href="/dotnet-tips/introduction/dotnet-folder-structure.html" aria-current="page" class="active sidebar-link">User Token</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="user-token"><a href="#user-token" class="header-anchor">#</a> User Token</h1> <p>The first thing we need to do is this. We run the <code>run_boogie_dev_server.py</code> script</p> <div class="language-csharp extra-class"><pre class="language-csharp"><code><span class="token keyword">public</span> <span class="token keyword">async</span> <span class="token return-type class-name">Task<span class="token punctuation">&lt;</span><span class="token keyword">string</span><span class="token punctuation">&gt;</span></span> <span class="token function">CreateToken</span><span class="token punctuation">(</span><span class="token class-name">AppUser</span> user<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token class-name"><span class="token keyword">var</span></span> claims <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">List<span class="token punctuation">&lt;</span>Claim<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+		<span class="token keyword">new</span> <span class="token constructor-invocation class-name">Claim</span><span class="token punctuation">(</span>JwtRegisteredClaimNames<span class="token punctuation">.</span>NameId<span class="token punctuation">,</span> user<span class="token punctuation">.</span>Id<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+		<span class="token keyword">new</span> <span class="token constructor-invocation class-name">Claim</span><span class="token punctuation">(</span>JwtRegisteredClaimNames<span class="token punctuation">.</span>UniqueName<span class="token punctuation">,</span> user<span class="token punctuation">.</span>Email<span class="token punctuation">)</span>
+	<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+	<span class="token class-name"><span class="token keyword">var</span></span> roles <span class="token operator">=</span> <span class="token keyword">await</span> _userManager<span class="token punctuation">.</span><span class="token function">GetRolesAsync</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token class-name">List<span class="token punctuation">&lt;</span>Claim<span class="token punctuation">&gt;</span></span> roleList <span class="token operator">=</span> roles<span class="token punctuation">.</span><span class="token function">Select</span><span class="token punctuation">(</span>u <span class="token operator">=&gt;</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Claim</span><span class="token punctuation">(</span>ClaimTypes<span class="token punctuation">.</span>Role<span class="token punctuation">,</span> u<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ToList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	claims<span class="token punctuation">.</span><span class="token function">AddRange</span><span class="token punctuation">(</span>roleList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token class-name"><span class="token keyword">var</span></span> creds <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">SigningCredentials</span><span class="token punctuation">(</span>_symmetricSecurityKey<span class="token punctuation">,</span> SecurityAlgorithms<span class="token punctuation">.</span>HmacSha256Signature<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token class-name"><span class="token keyword">var</span></span> tokenDescriptor <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">SecurityTokenDescriptor</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token punctuation">{</span>
+		Subject <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">ClaimsIdentity</span><span class="token punctuation">(</span>claims<span class="token punctuation">)</span><span class="token punctuation">,</span>
+		Expires <span class="token operator">=</span> DateTime<span class="token punctuation">.</span>Now<span class="token punctuation">.</span><span class="token function">AddDays</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+		SigningCredentials <span class="token operator">=</span> creds
+	<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+	<span class="token class-name"><span class="token keyword">var</span></span> tokenHandler <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">JwtSecurityTokenHandler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token class-name"><span class="token keyword">var</span></span> token <span class="token operator">=</span> tokenHandler<span class="token punctuation">.</span><span class="token function">CreateToken</span><span class="token punctuation">(</span>tokenDescriptor<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">return</span> tokenHandler<span class="token punctuation">.</span><span class="token function">WriteToken</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+
+</code></pre></div><p>Python 3 always wants bytes. So a middleware class called BytesResponseMiddleware, takes in the application and
+returns it in a bytes bytes format.
+This is the class' function here</p> <div class="language-csharp extra-class"><pre class="language-csharp"><code><span class="token keyword">private</span> <span class="token keyword">readonly</span> <span class="token class-name">SymmetricSecurityKey</span> _symmetricSecurityKey<span class="token punctuation">;</span>
+<span class="token keyword">private</span> <span class="token keyword">readonly</span> <span class="token class-name">UserManager<span class="token punctuation">&lt;</span>AppUser<span class="token punctuation">&gt;</span></span> _userManager<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token function">TokenService</span><span class="token punctuation">(</span><span class="token class-name">IConfiguration</span> config<span class="token punctuation">,</span> <span class="token class-name">UserManager<span class="token punctuation">&lt;</span>AppUser<span class="token punctuation">&gt;</span></span> userManager<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	_symmetricSecurityKey <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">SymmetricSecurityKey</span><span class="token punctuation">(</span>Encoding<span class="token punctuation">.</span>UTF8<span class="token punctuation">.</span><span class="token function">GetBytes</span><span class="token punctuation">(</span>config<span class="token punctuation">[</span><span class="token string">&quot;TokenKey&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	_userManager <span class="token operator">=</span> userManager<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>These bytes are returned and can finally be used for serving the application on the port.</p> <p>Now Let's dive into the Application and how it works</p> <h1 id="how-application-works"><a href="#how-application-works" class="header-anchor">#</a> How Application Works</h1> <p>This web application has four layers</p> <ul><li>Resource</li> <li>Business</li> <li>Business Bridge Datalayer</li> <li>Datalayer</li></ul></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/dotnet-tips/introduction/" class="prev router-link-active">
+        Overview
+      </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/dotnet-tips/assets/js/app.9def0bc5.js" defer></script><script src="/dotnet-tips/assets/js/2.9a2dc7bc.js" defer></script><script src="/dotnet-tips/assets/js/14.f8064b5a.js" defer></script>
+  </body>
+</html>
